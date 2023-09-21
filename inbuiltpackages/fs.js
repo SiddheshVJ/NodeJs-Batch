@@ -1,8 +1,17 @@
 let fs = require("fs")
 
-fs.writeFileSync('employee.txt', 'We are using express', (err) => {
+/*fs.writeFile("Employee.txt", "Hello world", (err) => {
     if (err) throw err;
-    console.log("Task done")
+    console.log("Writing done")
+})
+*/
 
-    // this writeFileSync will override the existing text from file and write new text
+fs.appendFile("employee.txt", " Hello from siddhesh", (err) => {
+    if (err) throw err;
+    console.log("Appending done")
+})
+
+fs.readFile('employee.txt', 'utf-8', (err, data) => {
+    if (err) throw err;
+    console.log(data)
 })
