@@ -4,19 +4,21 @@ let dotenv = require('dotenv')
 dotenv.config()
 let port = process.env.PORT || 3113
 
+let categoryRouter = require('./src/controller/categoryRouter')
+let productRouter = require('./src/controller/productRouter')
+
 // Default url
+
 app.get('/', (req, res) => {
-    res.send('<h1 > Hello from express</h1>')
-    // res.end() not requied beacause express internally manage
+    res.send("<h1>Hello welcome to full stack application</h1>")
 })
 
-app.get('/test', (req, res) => {
-    res.send('<h1> Test route</h1>')
-})
 
+app.use('/category', categoryRouter)
+app.use('/products', productRouter)
 app.listen(port, (err) => {
     if (err) throw err;
-    else { 
+    else {
         console.log(`server is running on ${port}`)
     }
 })
