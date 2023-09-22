@@ -5,8 +5,14 @@ let dotenv = require('dotenv')
 let morgan = require('morgan')
 dotenv.config()
 let port = process.env.PORT || 3113
-let categoryRouter = require('./src/controller/categoryRouter')
-let productRouter = require('./src/controller/productRouter')
+
+let menu = [
+    { name: 'Category', link: '/category' },
+    { name: 'Products', link: '/products' }
+]
+
+let categoryRouter = require('./src/controller/categoryRouter')(menu)
+let productRouter = require('./src/controller/productRouter')(menu)
 
 //logging info using fs system
 app.use(morgan('common', { stream: fs.createWriteStream('./app.log') }))
@@ -23,7 +29,7 @@ app.set('view engine', 'ejs')
 // Default url
 app.get('/', (req, res) => {
     // res.send("<h1>Hello welcome to full stack application</h1>")
-    res.render('index', { title: "Full stack app" })
+    res.render('index', { title: "Home Page", menu })
 })
 
 

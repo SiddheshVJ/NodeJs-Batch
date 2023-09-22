@@ -26,14 +26,19 @@ const category = [
     }
 ]
 
-categoryRouter.route('/')
-    .get((req, res) => {
-        res.send(category)
-    })
+function route(menu) {
 
-categoryRouter.route('/details')
-    .get((req, res) => {
-        res.send("category details")
-    })
+    categoryRouter.route('/')
+        .get((req, res) => {
+            res.render('category', { title: 'Category Page', data: category, menu })
+        })
 
-module.exports = categoryRouter;
+    categoryRouter.route('/details')
+        .get((req, res) => {
+            res.send("category details")
+        })
+
+    return categoryRouter
+}
+
+module.exports = route;
