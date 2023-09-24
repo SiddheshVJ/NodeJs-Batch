@@ -5,7 +5,6 @@ let fs = require('fs')
 let request = require('request')
 let dotenv = require('dotenv')
 dotenv.config()
-let weatherApiRouter = require('./src/controller/weatherApiRouter')
 let port = process.env.PORT || 3113
 
 // app log
@@ -21,11 +20,19 @@ app.set('views', './src/views')
 app.set('view engine', 'ejs')
 
 //Default
-app.get('/', (req, res) => {
-    res.send("<h1>Weather app</h1>")
+app.get('/weather', (req, res) => {
+    let city = req.query.city ? req.query.city : 'Delhi'
+    let url = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&mode=json&units=metric&cnt=5&appid=fbf712a5a83d7305c3cda4ca8fe7ef29`;
+
+    request(url, (err, response) => {
+        if(err){
+            console.log(err)
+        }else{
+            res.send(response.body)
+        }
+    })
 })
 
-app.use('/weather', weatherApiRouter)
 
 app.listen(port, (err) => {
     if (err) throw err;
