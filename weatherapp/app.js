@@ -1,9 +1,9 @@
-let express = require('express')
-let app = express()
-let morgan = require('morgan')
-let fs = require('fs')
-let request = require('request')
-let dotenv = require('dotenv')
+import express from 'express';
+let app = express();
+import morgan from 'morgan';
+import fs from 'fs';
+import request from 'request';
+import dotenv from 'dotenv';
 dotenv.config()
 let port = process.env.PORT || 3113
 
@@ -25,9 +25,9 @@ app.get('/weather', (req, res) => {
     let url = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&mode=json&units=metric&cnt=5&appid=fbf712a5a83d7305c3cda4ca8fe7ef29`;
 
     request(url, (err, response) => {
-        if(err){
+        if (err) {
             console.log(err)
-        }else{
+        } else {
             res.send(response.body)
         }
     })

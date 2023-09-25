@@ -1,5 +1,5 @@
 {
-  "name": "redis",
+  "name": "redis4",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,8 +7,7 @@
     "start": "node start.js",
     "dev": "nodemon start.js"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Siddhesh_VJ",
   "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.23.0",

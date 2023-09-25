@@ -1,7 +1,7 @@
 import express from 'express'
 import { createClient } from 'redis'
 import axios from 'axios'
-let port = process.env.PORT || 3113
+let port = process.env.PORT || 1896
 let app = express()
 
 let client = createClient({

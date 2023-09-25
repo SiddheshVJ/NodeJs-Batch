@@ -1,8 +1,0 @@
-::1 - - [24/Sep/2023:06:39:35 +0000] "GET /weather HTTP/1.1" - -
-::1 - - [24/Sep/2023:06:41:06 +0000] "GET /weather HTTP/1.1" - -
-::1 - - [24/Sep/2023:06:41:24 +0000] "GET / HTTP/1.1" 404 139
-::1 - - [24/Sep/2023:06:41:31 +0000] "GET /weather HTTP/1.1" 200 2072
-::1 - - [24/Sep/2023:06:41:31 +0000] "GET /favicon.ico HTTP/1.1" 404 150
-::1 - - [24/Sep/2023:06:41:42 +0000] "GET /weather?city=paris HTTP/1.1" 200 2050
-::1 - - [24/Sep/2023:06:42:41 +0000] "GET /weather?city=kolkata HTTP/1.1" 200 2088
-::1 - - [24/Sep/2023:06:42:54 +0000] "GET /weather?city=london HTTP/1.1" 200 2078
