@@ -1,0 +1,17 @@
+// Mongo db query //
+
+
+// (1) find with conditions
+
+/*
+db.products.find({Brand:"Gucci"})
+
+db.products.find({Brand:"Gucci", Color:"White"})
+
+db.restaurants.find({}) // will give all restaurants
+
+//projection
+db.restaurant.find({condition},{projection})
+
+db.restaurant.find({condition},{restaurant_name:1,cost:1,_id:0}) // 1 indicates true and this query wil give only restaurants and cost
+*/
