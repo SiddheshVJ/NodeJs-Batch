@@ -55,10 +55,22 @@
 // Page 4
 
 - Details of selected Menu
-  =>
+  => so get input from user in terms of id in array
+  => http://localhost:1896/menuDetails
 
 - Place order
-  =>
+  => http://localhost:1896/placeOrder
+  {
+  "orderId": 10,
+  "name": "Siddhesh",
+  "email": "siddheshvjadhav20@gmail.com",
+  "address": "Pune",
+  "phone": 9834785529,
+  "menuItem": [
+  12,
+  10
+  ]
+  }
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -70,7 +82,15 @@
   => http://localhost:1896/orders?email=anchal@gmail.com
 
 - Update order details
-  =>
+  => put call
+  => {
+  "\_id": "6516e0a8f826efa3ab6648a0",
+  "address" : "654 Model Town"
+  }
+  =>http://localhost:1896/updateOrder
 
 - Delete order
-  =>
+  => {
+  "\_id": "651844e60a27fef0dae0f9e8"
+  }
+  => http://localhost:1896/deleteOrder

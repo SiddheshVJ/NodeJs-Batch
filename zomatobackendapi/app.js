@@ -3,7 +3,7 @@ import { ObjectId, MongoClient } from 'mongodb'
 import dotenv from 'dotenv'
 import bodyParser, { json } from 'body-parser'
 import cors from 'cors'
-import { getData, postData, getDataWithSort, getDataWithSortLimit } from './src/controller/apiController'
+import { getData, postData, deleteData, updateData, getDataWithSort, getDataWithSortLimit } from './src/controller/apiController'
 
 let app = express()
 dotenv.config()
@@ -156,7 +156,55 @@ app.get('/orders', async (req, res) => {
     res.send(output)
 })
 
+// place order
+app.post('/placeOrder', async (req, res) => {
+    let data = req.body
+    let collection = "orders"
+    let response = await postData(db, collection, data)
+    res.status(200).send(response)
+})
 
+// get menu details {"id" :[10,20]}
+
+app.post('/menuDetails', async (req, res) => {
+    if (Array.isArray(req.body.id)) {
+        let query = { menu_id: { $in: req.body.id } }
+        let collection = 'restaurants_menu'
+        let output = await getData(db, collection, query)
+        res.status(200).send(output)
+
+    } else {
+        res.send('Please pass data in thee form of {"id":[10, 20]}')
+    }
+})
+
+// update order
+app.put("/updateOrder", async (req, res) => {
+    let collection = "orders"
+    let condition = { "_id": ObjectId(req.body.name) }
+    let data = {
+        $set: {
+            "address": req.body.address
+        }
+    }
+    let response = await updateData(db, collection, condition, data)
+    res.send(response)
+})
+
+
+// delete order
+app.delete('/deleteOrder', async (req, res) => {
+    let collection = 'orders'
+    let query = { "_id": ObjectId(req.body._id) }
+    let rowCount = await getData(db, collection, query)
+
+    if (rowCount.length > 0) {
+        let response = await deleteData(db,collection, query)
+        res.send(response)
+    } else {
+        res.send("No Order Found")
+    }
+})
 
 MongoClient.connect(mongo_url, { useNewUrlParser: true }, (err, client) => {
     if (err) console.log('Error while connecting Mongodb')
