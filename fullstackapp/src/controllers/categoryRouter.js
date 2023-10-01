@@ -1,10 +1,11 @@
-let express = require('express');
-let categoryRouter = express.Router();
-let mongodb = require('mongodb').MongoClient;
+import { Router } from 'express';
+let categoryRouter = Router();
+import { MongoClient as mongodb } from 'mongodb';
 let url = process.env.MONGO_URL;
 
 function router(menu) {
-    categoryRouter.route('/')
+    categoryRouter
+        .route('/')
         .get((req, res) => {
             mongodb.connect(url, function (err, dc) {
                 if (err) {
@@ -32,4 +33,4 @@ function router(menu) {
 
 
 
-module.exports = router
+export default router
