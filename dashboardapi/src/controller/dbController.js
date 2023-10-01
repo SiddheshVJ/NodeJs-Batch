@@ -10,9 +10,23 @@ export async function dbConnect() {
         const client = await new MongoClient(mongoUrl).connect()
         db = client.db('dashboardapi')
         console.log('Connected')
-        // db.collection('sampleUser')
-        return db
     } catch (err) {
         console.log(err)
     }
+}
+
+export async function addUser(query) {
+    return await db.collection('sampleUser').insertOne(query)
+}
+
+
+export async function getUser(query) {
+    return await db.collection('sampleUser').find(query).toArray()
+}
+export async function updateUser(condition, data) {
+    return await db.collection('sampleUser').updateOne(condition, data)
+}
+
+export async function deleteUser(data) {
+    return await db.collection('sampleUser').deleteOne(data)
 }

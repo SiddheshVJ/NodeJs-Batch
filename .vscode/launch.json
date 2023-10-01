@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "chrome",
+            "name": "http://localhost:1896/users?role=admin",
+            "request": "launch",
+            "url": "http://localhost:1896/users?role=admin"
+        }
+    ]
+}
