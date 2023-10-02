@@ -1,0 +1,7 @@
+::1 - - [02/Oct/2023:15:31:11 +0000] "GET /api-doc/ HTTP/1.1" 304 -
+::1 - - [02/Oct/2023:15:31:11 +0000] "GET /api-doc/swagger-ui-init.js HTTP/1.1" 200 3241
+::1 - - [02/Oct/2023:15:31:11 +0000] "GET /api-doc/swagger-ui.css HTTP/1.1" 304 -
+::1 - - [02/Oct/2023:15:31:11 +0000] "GET /api-doc/swagger-ui-bundle.js HTTP/1.1" 304 -
+::1 - - [02/Oct/2023:15:31:11 +0000] "GET /api-doc/swagger-ui-standalone-preset.js HTTP/1.1" 304 -
+::1 - - [02/Oct/2023:15:31:11 +0000] "GET /api-doc/favicon-32x32.png HTTP/1.1" 304 -
+::1 - - [02/Oct/2023:15:31:15 +0000] "GET /user/65190b3adac7b5cf4f4e0fa8 HTTP/1.1" 200 117
