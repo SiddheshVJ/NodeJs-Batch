@@ -6,7 +6,7 @@ import dotenv from 'dotenv'
 import fs from 'fs'
 
 import { ObjectId } from 'mongodb'
-import { dbConnect,addUser, getUser, updateUser, deleteUser } from './src/controller/dbController'
+import { dbConnect, addUser, getUser, updateUser, deleteUser } from './src/controller/dbController'
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json')
@@ -21,12 +21,22 @@ app.use(morgan('common', { stream: fs.createWriteStream('./app.log') }))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
+app.use(express.static(__dirname + '/public'))
+app.set('view engine', 'ejs')
+app.set('views', './src/views')
 
-app.use('/api-doc',swaggerUi.serve,swaggerUi.setup(swaggerDocument))
+// swagger ui
+app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 //Health check
 app.get('/healthCheck', (req, res) => {
     res.send("<h1>Health OK !</h1>")
+})
+
+app.get('/', async (req, res) => {
+    let query = {}
+    const response = await getUser(query)
+    res.render('index',{data: response})
 })
 
 //routes
@@ -83,11 +93,11 @@ app.put('/updateuser', async (req, res) => {
     let condition = { _id: new ObjectId(req.params.id) }
     let data = {
         $set: {
-            "name": req.query.name,
-            "city": req.query.city,
-            "phone": req.query.phone,
-            "role": req.query.role,
-            "isActive": req.query.isActive
+            name: req.query.name,
+            city: req.query.city,
+            phone: req.query.phone,
+            role: req.query.role,
+            isActive: req.query.isActive
         }
     }
     let response = await updateUser(condition, data)
@@ -97,7 +107,7 @@ app.put('/updateuser', async (req, res) => {
 // delete user
 app.delete('/deleteuser', async (req, res) => {
 
-    let condition = { _id: new ObjectId(req.query.id) }
+    let condition = { _id: new ObjectId(req.body.id) }
 
     let response = await deleteUser(condition)
     res.send(response)

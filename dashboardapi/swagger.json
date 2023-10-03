@@ -62,6 +62,67 @@
           }
         }
       }
+    },
+    "/addUser": {
+      "Summary": "Get All Users",
+      "post": {
+        "Description": "Get All Users",
+        "tags": ["PUBLIC ROUTES"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "id": "string"
+              },
+              "example": {
+                "name": "Keerti",
+                "city": "Amsterdam",
+                "phone": "989878462",
+                "role": "User",
+                "isActive": "true"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "get User Details"
+          }
+        }
+      }
+    },
+    "/updateuser": {
+      "Summary": "Update User",
+      "put": {
+        "Description": "Update User",
+        "tags": ["PUBLIC ROUTES"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "id": "string"
+              },
+              "example": {
+                "_id": "",
+                "name": "Keerti",
+                "city": "Amsterdam",
+                "phone": "989878462",
+                "role": "User",
+                "isActive": "true"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "get User Details"
+          }
+        }
+      }
     }
   }
 }

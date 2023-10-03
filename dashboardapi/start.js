@@ -1,2 +1,2 @@
 require("@babel/register")
-module.exports = require('./app.js')
+module.exports = require('./appwithUi.js')
