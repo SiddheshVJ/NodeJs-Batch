@@ -1,4 +1,4 @@
-[
+db.user.insert([
     {
         "name": "Nikita",
         "city": "London",
@@ -12,13 +12,6 @@
         "phone": 323463547,
         "role": "User",
         "isActive": false
-    },
-    {
-        "name": "Anchal",
-        "city": "Paris",
-        "phone": 6456454532,
-        "role": "Admin",
-        "isActive": true
     },
     {
         "name": "Amit",
@@ -84,4 +77,4 @@
         "role": "User",
         "isActive": true
     }
-]
+])

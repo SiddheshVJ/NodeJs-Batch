@@ -1,5 +1,6 @@
-import mongoose from 'mongoose';
+// specify structure of data
 
+let mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
     name: String,
@@ -9,8 +10,6 @@ const userSchema = new mongoose.Schema({
     role: String
 })
 
+mongoose.model('user', userSchema)
 
-const User = mongoose.model('user', userSchema)
-// mongoose.model(collection name,data type)
-
-module.exports = User
+module.exports = mongoose.model('user')

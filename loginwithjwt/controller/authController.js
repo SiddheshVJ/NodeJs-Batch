@@ -1,18 +1,60 @@
-import express from 'express';
-import { Router } from 'express';
-import bodyParser from 'body-parser';
-import { Jwt } from 'jsonwebtoken';
-import bcrypt from 'bcryptjs';
+const express = require('express')
+
+const router = express.Router()
+const bodyParser = require('body-parser')
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
 const config = require('../config')
-import User from '../model/userSchema'
+const User = require('../model/userSchema')
 
-let authControllerRouter = Router();
 
-authControllerRouter.get('/users',async (req, res) => {
+router.use(bodyParser.urlencoded({ extended: true }))
+router.use(bodyParser.json())
+
+
+// get all users
+
+router.get('/users', async (req, res) => {
     let output = await User.find({})
-
-    console.log(output)
     res.status(200).send(output)
 })
 
-module.exports = authControllerRouter
+// register user
+router.post('/register', async (req, res) => {
+    // encrypt password
+    let hashPass = bcrypt.hashSync(req.body.password, 8)
+    let response = await User.create({
+        name: req.body.name,
+        email: req.body.email,
+        password: hashPass,
+        phone: req.body.phone,
+        role: req.body.role ? req.body.role : 'user',
+    })
+
+    res.status(200).send("User Successfully registered")
+})
+
+
+// login user
+router.post('/login', async (req, res) => {
+    let user = await User.findOne({ email: req.body.email })
+
+    if (!user) {
+        res.send({ auth: false, token: 'No user found register please' })
+    } else {
+        const passIsValid = bcrypt.compareSync(req.body.password, user.password)
+
+        if (!passIsValid) {
+            res.send({ auth: false, token: 'Invalid password' })
+        } else {
+            let token = jwt.sign({ id: user._id }, config.secret, { expiresIn: 86400 })
+            res.send({ auth: true, token: token })
+
+        }
+
+        // in case both match
+
+    }
+})
+
+module.exports = router

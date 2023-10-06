@@ -1,18 +1,22 @@
-import express from 'express';
-import dotenv from 'dotenv'
-import db from './db'
-import cors from 'cors'
-import AuthController from './controller/authController.js'
+const express = require('express')
+const db = require('./db')
+const cors = require('cors')
 
-dotenv.config()
-const port = process.env.PORT || 3113
-const app = express();
 
-app.use(cors());
+let app = express()
+let port = 1896
+
+
+
+app.use(cors())
+
+
+const AuthController = require('./controller/authController')
+
 app.use('/api/auth', AuthController)
 
 
 app.listen(port, (err) => {
-    if (err) throw err;
-    console.log(`port ${port} listening.`)
+    if (err) throw err
+    console.log(`${port} is running`)
 })
