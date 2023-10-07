@@ -57,4 +57,19 @@ router.post('/login', async (req, res) => {
     }
 })
 
+// userinfo
+
+router.get('/userinfo', async (req, res) => {
+    let token = req.headers['x-access-token']
+    if (!token) res.send({ auth: false, token: 'No token provided' })
+
+    //jwt verify
+    jwt.verify(token, config.secret, async (err, user) => {
+        if (err) res.send({ auth: false, token: "Invalid token provided" })
+        let result = await User.findById(user.id)
+        res.send(result)
+    })
+})
+
+
 module.exports = router
